@@ -1,15 +1,147 @@
 <!DOCTYPE html>
-
-<html lang="en">
-
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas Jarkom - Implementasi Firewall</title>
     <link rel="stylesheet" href="styles.css">
-    <title>Document</title>
-</head>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet"></head>
 <body>
-    <h1>Halo</h1>    
+
+    <header class="main-header">
+        <div class="container">
+            <h1 class="article-title">Implementasi Firewall sebagai Penjaga Gerbang Keamanan Digital: Evolusi, Strategi, dan Tantangan Modern</h1>
+            
+            <div class="team-section">
+                <p class="team-label">Tim Penyusun:</p>
+                <ul class="team-list-vertical">
+                    <li><i class="fas fa-user-circle"></i> Ilham Cahyo Saputro (123250097)</li>
+                    <li><i class="fas fa-user-circle"></i> Intan Nur Ayni (123250098)</li>
+                    <li><i class="fas fa-user-circle"></i> Shalvina Anastasya Putri (123250106)</li>
+                    <li><i class="fas fa-user-circle"></i> Gega Ramadhan (123250112)</li>
+                </ul>
+            </div>
+
+            <div class="image-placeholder">
+                <img src="https://via.placeholder.com/1200x500" alt="Ilustrasi Network Security Firewall">
+                <p class="image-caption">Gambar 1.1: Ilustrasi Visual Keamanan Jaringan Modern</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="content-section">
+            <h2>Pendahuluan</h2>
+            
+            <p>
+                Perkembangan teknologi informasi yang semakin pesat telah membawa perubahan signifikan dalam pengelolaan sistem jaringan komputer di berbagai sektor, termasuk pendidikan. Ketergantungan yang tinggi terhadap layanan digital menjadikan <strong>keamanan jaringan</strong> sebagai aspek krusial yang harus dijaga secara serius. Seiring dengan meningkatnya aktivitas digital, ancaman siber juga mengalami perkembangan yang kompleks, seperti serangan <em>ransomware</em>, <em>Distributed Denial of Service (DDoS)</em>, <em>malware</em>, hingga infiltrasi berbasis aplikasi yang menunjukkan bahwa mekanisme pertahanan tradisional tidak lagi memadai <em>(Bellamkonda, 2024; Patel, 2024)</em>.
+            </p>
+
+            <p>
+                Dalam konteks akademik, <strong> <a href="https://upnyk.ac.id/">Universitas Pembangunan Nasional "Veteran" Yogyakarta (UPNVYK)</a></strong> memiliki peran strategis dalam mengembangkan kompetensi keamanan siber melalui kurikulum, riset, dan kolaborasi dengan industri. Pemahaman mendalam mengenai teknologi <strong>firewall</strong> dan strategi pertahanan jaringan menjadi kompetensi penting bagi mahasiswa <strong>Teknik Informatika</strong> dan praktisi TI dalam menghadapi dinamika ancaman digital yang terus berkembang.
+            </p>
+
+            <p>
+                Firewall merupakan komponen utama dalam sistem keamanan jaringan yang berfungsi sebagai penyaring, pengendali, dan pengawas lalu lintas data. Secara historis, teknologi firewall telah berevolusi dari <em>packet filtering</em> sederhana hingga <strong>Next-Generation Firewall (NGFW)</strong> yang mampu melakukan <em>Deep Packet Inspection (DPI)</em>, kontrol berbasis aplikasi, serta deteksi ancaman secara <em>real-time</em> <em>(George & George, 2021; Patel, 2024)</em>. Namun, efektivitas firewall tidak hanya ditentukan oleh kecanggihan perangkat, melainkan juga oleh strategi konfigurasi, kebijakan keamanan, dan integrasinya dalam arsitektur pertahanan yang lebih luas.
+            </p>
+
+            <p>
+                Artikel ini membahas implementasi firewall sebagai penjaga gerbang keamanan digital, mencakup evolusi teknologi, kapabilitas firewall modern, strategi integrasi dalam arsitektur <strong>defense in depth</strong> dan <strong>Zero Trust</strong>, serta tantangan praktis dalam penerapannya. Tujuannya adalah memberikan panduan komprehensif bagi akademisi, praktisi TI, dan civitas <strong>UPNVYK</strong> dalam merancang dan mengelola firewall yang efektif, skalabel, dan berkelanjutan di era ancaman siber yang dinamis.
+            </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <hr class="section-divider">
+
+        <section class="content-section">
+            <h2>Isi Materi</h2>
+            
+            <h3>1. Evolusi Firewall: Dari Penyaring Dasar hingga Penjaga Gerbang Cerdas</h3>
+            <p>Perkembangan teknologi firewall dalam literatur diklasifikasikan ke dalam lima generasi utama yang mencerminkan respons terhadap meningkatnya kompleksitas ancaman siber:</p>
+            <ul>
+                <li><strong>Generasi Pertama (Packet Filtering):</strong> Melakukan pemeriksaan sederhana terhadap header paket berdasarkan alamat IP dan nomor port. Efektif untuk kontrol dasar dan memiliki performa tinggi, namun sangat terbatas dalam mendeteksi serangan di tingkat aplikasi <em>(Mohammed & Shaik, 2025; Surana et al., 2017)</em>.</li>
+                <li><strong>Generasi Kedua (Stateful Inspection):</strong> Memperkenalkan pelacakan status koneksi (seperti <em>handshake TCP</em>), sehingga mampu memahami konteks lalu lintas dan memberikan penyaringan yang lebih akurat dibandingkan metode statis <em>(George & George, 2021)</em>.</li>
+                <li><strong>Generasi Ketiga (Application Layer):</strong> Menyaring lalu lintas berdasarkan aplikasi dan protokol spesifik (HTTP, SMTP, dll.) serta memeriksa muatan data di tingkat aplikasi. Meski lebih aman, pendekatan ini sering menghadapi tantangan pada aspek performa dan skalabilitas <em>(Patel, 2024)</em>.</li>
+                <li><strong>Generasi Keempat (Next-Generation Firewall/NGFW):</strong> Menandai tonggak utama evolusi firewall dengan mengintegrasikan <strong>Deep Packet Inspection (DPI)</strong>, kontrol aplikasi, identifikasi pengguna, <strong>Intrusion Prevention System (IPS)</strong>, dan umpan <em>threat intelligence</em> global. NGFW dirancang khusus untuk menghadapi ancaman lanjutan seperti <em>Advanced Persistent Threat (APT)</em> dan <em>ransomware</em> <em>(Bellamkonda, 2024)</em>.</li>
+                <li><strong>Generasi Kelima (Cloud & AI-Driven):</strong> Mengarah pada solusi berbasis awan (<em>Firewall as a Service/FWaaS</em>) dan pemanfaatan kecerdasan buatan. Firewall adaptif ini cocok untuk lingkungan komputasi awan, arsitektur terdistribusi, serta jaringan yang mengadopsi <em>Software-Defined Networking (SDN)</em> <em>(Karambelkar et al., 2025)</em>.</li>
+            </ul>
+
+            <h3>2. Kapabilitas Firewall Modern sebagai Penjaga Gerbang Digital</h3>
+            <p>Firewall modern tidak lagi berfungsi sebagai "dinding statis", melainkan sebagai komponen aktif yang mampu memahami konteks, menganalisis perilaku, dan merespons ancaman secara <em>real-time</em>. Beberapa kapabilitas kunci meliputi:</p>
+            <ul>
+                <li><strong>Deep Packet Inspection (DPI):</strong> Memungkinkan pemeriksaan muatan paket hingga lapisan aplikasi untuk mengidentifikasi pola serangan, aplikasi terselubung, atau upaya eksfiltrasi data.</li>
+                <li><strong>Integrasi IPS & Sandboxing:</strong> Firewall modern mampu memblokir aktivitas berbahaya secara otomatis berdasarkan tanda tangan (<em>signature</em>) maupun analisis heuristik. <em>Sandboxing</em> memungkinkan eksekusi terisolasi terhadap file mencurigakan sebelum memasuki jaringan utama <em>(Patel, 2024)</em>.</li>
+                <li><strong>Kontrol Berbasis Identitas & Aplikasi:</strong> Kebijakan keamanan tidak lagi hanya mengandalkan IP/port, tetapi dikaitkan dengan identitas pengguna, peran, dan aplikasi yang diakses, sehingga mendukung prinsip <strong>least privilege</strong>.</li>
+                <li><strong>Adaptasi Berbasis AI/ML:</strong> Algoritma pembelajaran mesin telah diuji pada arsitektur SDN untuk meningkatkan akurasi deteksi serangan DDoS dan anomali, sekaligus menekan tingkat <em>false positive</em> <em>(Bellamkonda, 2024)</em>.</li>
+            </ul>
+
+            <h3>3. Strategi Implementasi dalam Arsitektur Pertahanan Jaringan</h3>
+            <p>Efektivitas firewall sangat bergantung pada bagaimana ia diintegrasikan ke dalam strategi pertahanan jaringan yang holistik:</p>
+            <ul>
+                <li><strong>Defense in Depth (Pertahanan Berlapis):</strong> Strategi ini menekankan penerapan kontrol keamanan pada berbagai tingkat sistem: perimeter, jaringan internal, endpoint, hingga aplikasi. Firewall berperan sebagai lapisan pertama <em>(Bellamkonda, 2024; Patel, 2024)</em>.</li>
+                <li><strong>Zero Trust Architecture (ZTA):</strong> Mengusung prinsip <em>"never trust, always verify"</em>, ZTA menghilangkan kepercayaan implisit berdasarkan lokasi jaringan. Firewall modern diintegrasikan dengan <strong>Zero Trust Network Access (ZTNA)</strong> dan <em>micro-segmentation</em> <em>(Rose et al., n.d.)</em>.</li>
+                <li><strong>Sinergi dengan IDS/IPS, VPN, dan SIEM:</strong> Pengumpulan dan korelasi log dari firewall ke dalam <strong>SIEM/SOAR</strong> mendukung deteksi insiden serta respons otomatis yang lebih cepat <em>(Fitrian et al., 2025)</em>.</li>
+            </ul>
+
+            <h3>4. Langkah Implementasi Praktis & Tantangan yang Dihadapi</h3>
+            <p>Tahapan Implementasi yang Direkomendasikan:</p>
+            <ul>
+                <li><strong>Asesmen Kebutuhan & Pemetaan Arsitektur:</strong> Identifikasi aset kritis, pola lalu lintas, dan celah keamanan eksisting.</li>
+                <li><strong>Perancangan Kebijakan & Optimasi Aturan:</strong> Susun aturan berdasarkan prinsip <em>default-deny</em>, kelompokkan berdasarkan risiko, dan hindari redundansi.</li>
+                <li><strong>Deployment Bertahap & Konfigurasi Aman:</strong> Terapkan dalam mode monitoring terlebih dahulu, lakukan uji penetrasi, lalu aktifkan mode <em>enforcement</em>.</li>
+                <li><strong>Integrasi dengan Ekosistem Keamanan:</strong> Hubungkan dengan IPS, SIEM, sistem autentikasi terpusat, dan <em>threat intelligence feed</em>.</li>
+                <li><strong>Monitoring Berkelanjutan & Pembaruan:</strong> Tinjau log secara rutin, perbarui <em>signature</em>/database ancaman, dan lakukan audit konfigurasi berkala.</li>
+            </ul>
+
+            <p>Tantangan Utama dalam Implementasi:</p>
+            <ul>
+                <li><strong>Biaya & Lisensi:</strong> Teknologi lanjutan (NGFW, FWaaS, AI-driven) memerlukan investasi finansial yang signifikan.</li>
+                <li><strong>Kompleksitas Integrasi:</strong> Kesesuaian antar komponen keamanan dan kompatibilitas dengan infrastruktur eksisting sering menjadi hambatan teknis.</li>
+                <li><strong>Kebutuhan SDM Kompeten:</strong> Diperlukan personel yang memahami tidak hanya konfigurasi firewall, tetapi juga arsitektur <em>Zero Trust</em>, analisis log, dan manajemen insiden.</li>
+                <li><strong>Dampak Performa:</strong> Fitur seperti DPI dan analisis berbasis AI dapat meningkatkan latensi jika tidak dioptimalkan atau di-<em>scale</em> secara tepat.</li>
+                <li><strong>Risiko Kesalahan Konfigurasi:</strong> Literatur menegaskan bahwa <em>misconfiguration</em> masih menjadi penyebab utama celah keamanan, sehingga manajemen berkelanjutan adalah kunci <em>(Bellamkonda, 2024; Patel, 2024)</em>.</li>
+            </ul>
+        </section>
+
+        <hr class="section-divider">
+
+        <section class="content-section">
+            <h2>Penutup</h2>
+            <p>
+                Implementasi firewall sebagai penjaga gerbang keamanan digital telah bertransformasi dari pendekatan statis menjadi strategi dinamis yang terintegrasi. Firewall generasi baru, khususnya <strong>NGFW</strong> dan solusi berbasis <strong>cloud/AI</strong>, menawarkan visibilitas, kontrol, dan kemampuan pencegahan ancaman yang jauh lebih unggul dibandingkan pendahulunya. Namun, kecanggihan teknologi tidak menjamin keamanan jika tidak diiringi dengan perancangan kebijakan yang tepat, integrasi dalam arsitektur <em>defense in depth</em> dan <em>Zero Trust</em>, serta pengelolaan yang berkelanjutan.
+            </p>
+            <p>
+                Tantangan berupa biaya, kompleksitas, kebutuhan SDM, dan dampak performa dapat dimitigasi melalui perencanaan matang, pelatihan personel, serta pendekatan implementasi bertahap. Ke depan, penelitian empiris dan pengujian langsung pada lingkungan jaringan spesifik sangat disarankan untuk memvalidasi efektivitas konfigurasi firewall dalam kondisi operasional nyata. Pada akhirnya, firewall bukanlah solusi tunggal, melainkan fondasi kritis dalam ekosistem keamanan siber yang harus terus diadaptasi, dipantau, dan ditingkatkan seiring evolusi ancaman digital.
+            </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section class="content-section references">
+            <h2>Daftar Pustaka</h2>
+            <ul>
+                <li>Bellamkonda, S. (2024). <em>Next-Gen Firewalls and Network Security: Enhancing Defense through Advanced Threat Mitigation Techniques</em>. 10(6), 692–702.</li>
+                <li>Erwin Dwi Setiawan, & Ridwansyah, M. R. (2023). Perancangan Keamanan Jaringan Next-Generation Firewall Menggunakan Router Fortinet pada PT. Alodokter Teknologi Solusi. 9(1), 34–39.</li>
+                <li>Fitrian, H. P., Noorjamil, B. F., Rahmawati, F., & Rachman, S. A. (2025). Analisis Efektivitas Firewall dalam Memfilter dan Melindungi Lalu Lintas Jaringan. 8(1), 95–102.</li>
+                <li>George, A. S., & George, A. S. H. (2021). <em>A Brief Study on The Evolution of Next Generation Firewall and Web Application Firewall</em>. 10(5), 31–37.</li>
+                <li>Karambelkar, A., Gupta, S., Agarwal, V., & Behra, S. (2025). <em>Next Generation Firewall using IPS & IDS</em>. April.</li>
+                <li>Mohammed, K., & Shaik, N. (2025). <em>Next-Generation Firewalls: Beyond Traditional Perimeter Defense</em>. 7(4), 1–6.</li>
+                <li>Patel, U. (2024). <em>The Role of Next-Generation Firewalls in Modern Network Security: A Comprehensive Analysis</em>. 15(4), 135–154.</li>
+                <li>Rose, S., Borchert, O., Mitchell, S., & Connelly, S. (n.d.). <em>Zero Trust Architecture (NIST Special Publication 800-207)</em>. National Institute of Standards and Technology.</li>
+                <li>Surana, J., Singh, K., Bairagi, N., Mehto, N., & Jaiswal, N. (2017). <em>Survey on Next Generation Firewall</em>. 5(2), 984–988.</li>
+                <li>Yusuf, M. L., Karsono, K., & Budhisantosa, N. (2020). Analisis Performance Next Generation Firewall dan Mikrotik RB1100 sebagai Firewall untuk Keamanan Jaringan. 5, 15–30.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p style="text-align: center;">&copy; 2026 Teknik Informatika UPNVYK</p>
+            <p class="footer-sub">Kelompok 7 Jaringan Komputer - Keamanan Digital</p>
+        </div>
+    </footer>
+
 </body>
 </html>
